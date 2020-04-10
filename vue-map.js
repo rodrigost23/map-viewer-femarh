@@ -14,13 +14,15 @@
             return {
                 colorMenu: false,
                 loading: false,
+                showdesmata: true,
                 show: true,
                 enableTooltip: true,
                 minZoom:7,
                 zoom: 6,
                 center: [2.713,-60.601],
-                geojson: null,
-                fillColor: "#e4ce7f",
+                geojson_queimada: null,
+                geojson_desmata: null,
+                fillColor: "#f00",
                 url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 attribution:
                     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -29,6 +31,11 @@
                   'mdi-home',
                   'mdi-email',
                 ],
+
+                 fav: true,
+                menu: false,
+                message: false,
+                hints: true,
             };
         },
         computed: {
@@ -49,6 +56,8 @@
                     };
                 };
             },
+
+
             onEachFeatureFunction() {
                 if (!this.enableTooltip) {
                     return () => { };
@@ -79,15 +88,49 @@
                     border: '4px #fff solid'
                 }
             }
+
+
+
+        },
+
+    
+        methods:{
+           
+            async fetchQueimada(){
+                const response = await fetch(
+                    "https://raw.githubusercontent.com/danielgohl13/map-viewer-femarh/map-viewer-vue/queima.json"
+                );
+                const data_queimada = await response.json();
+                this.geojson_queimada = data_queimada;
+
+            },
+
+            async fetchDesmata(){
+                const response = await fetch(
+                    "https://raw.githubusercontent.com/danielgohl13/map-viewer-femarh/map-viewer-vue/desmatamento.json"
+                );
+                const data_desmatamento = await response.json();
+                this.geojson_desmata = data_desmatamento;
+
+            },
         },
         
         async created() {
+            var self = this;
             this.loading = true;
-            const response = await fetch(
-                "https://rawgit.com/gregoiredavid/france-geojson/master/regions/pays-de-la-loire/communes-pays-de-la-loire.geojson"
-            );
-            const data = await response.json();
-            this.geojson = data;
-            this.loading = false;
+            Promise.all([
+                this.fetchDesmata(),
+                this.fetchQueimada()
+            ]).then(function () {
+                self.loading = false;
+            });
         }
+
+        
+
+
+
+
+
+        
     });
