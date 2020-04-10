@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>GeoJson</title>
+    <title>Sigma</title>
     <meta charset="UTF-8" />
     <link
         href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
@@ -29,10 +29,8 @@
                     color="#ffffff"></v-progress-circular>
                 <v-spacer></v-spacer>
 
-                <v-switch hide-details v-model="show" inset
-                    label="GeoJSON Visibility"></v-switch>
+                
 
-              
                 <v-menu offset-y="true" v-model="colorMenu">
                     <template v-slot:activator="{ on }">
                         <v-btn icon v-on="on">
@@ -41,6 +39,64 @@
                     </template>
                     <v-color-picker show-swatches v-model="fillColor">
                     </v-color-picker>
+                </v-menu>
+                <v-menu>
+                  <template v-slot:activator="{ on }">
+                    <div class="text-center">
+                      <v-menu
+                        v-model="menu"
+                        :close-on-content-click="false"
+                        :nudge-width="200"
+                        offset-x
+                      >
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            color="green darken-2"
+                            dark
+                            v-on="on"
+                          >
+                            Configurações
+                          </v-btn>
+                        </template>
+                  
+                        <v-card>
+                          <v-list>
+                        
+                  
+                          <v-list>
+
+                            <v-list-item>
+                              <v-list-item-action>
+                                <v-switch v-model="show" color="purple"></v-switch>
+                              </v-list-item-action>
+                              <v-list-item-title>Camada queimadas</v-list-item-title>
+                            </v-list-item>
+
+                            <v-list-item>
+                              <v-list-item-action>
+                                <v-switch v-model="message" color="purple"></v-switch>
+                              </v-list-item-action>
+                              <v-list-item-title>Enable messages</v-list-item-title>
+                            </v-list-item>
+                  
+
+                            <v-list-item>
+                              <v-list-item-action>
+                                <v-switch v-model="hints" color="purple"></v-switch>
+                              </v-list-item-action>
+                              <v-list-item-title>Enable hints</v-list-item-title>
+                            </v-list-item>
+                          </v-list>
+                  
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+
+                            <v-btn color="primary" text @click="menu = false">Fechar</v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-menu>
+                    </div>
+                  </template>
                 </v-menu>
             </v-app-bar>
 
