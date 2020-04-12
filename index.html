@@ -61,24 +61,16 @@
                               <v-list-item-action>
                                 <v-switch v-model="showdesmata" color="green darken-3"></v-switch>
                               </v-list-item-action>
-                              <v-list-item-title>Camada queimadas</v-list-item-title>
+                              <v-list-item-title>Desmatamento autorizado</v-list-item-title>
                             </v-list-item>
 
                             <v-list-item>
                               <v-list-item-action>
-                                <v-switch v-model="message" color="green darken-3"></v-switch>
+                                <v-switch v-model="showqueimada" color="green darken-3"></v-switch>
                               </v-list-item-action>
-                              <v-list-item-title>Enable messages</v-list-item-title>
+                              <v-list-item-title>Queimadas</v-list-item-title>
                             </v-list-item>
                   
-
-                            <v-list-item>
-                              <v-list-item-action>
-                                <v-switch v-model="hints" color="green darken-3"></v-switch>
-                              </v-list-item-action>
-                              <v-list-item-title>Enable hints</v-list-item-title>
-                            </v-list-item>
-                          </v-list>
                           
                           <v-divider></v-divider>
                           
@@ -106,8 +98,9 @@
                     <l-map :zoom="zoom" :minZoom="7" :center="center" style="z-index: 0;">
                         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                         
-                        <l-geo-json v-if="showdesmata" :geojson="geojson_desmata":options="options" :options-style="styleFunction" />
-
+                        <l-geo-json v-if="showdesmata" :geojson="geojson_desmata":options="options" :options-style="styleFunction" ></l-geo-json>
+                        <l-geo-json v-if="showqueimada" :geojson="geojson_queimada":options="options" :options-style="styleFunction" ></l-geo-json>
+                      
                       </l-map>
                 </v-container>
 
@@ -133,7 +126,7 @@
 
                   <v-divider></v-divider>
 
-                  <v-card-text class="white--text">
+                  <v-card-text class="py-2">
                   {{ new Date().getFullYear() }} — <strong>CIACT - DMCA</strong>
                   </v-card-text>
               </v-card>
