@@ -47,6 +47,24 @@
                 };
             },
 
+               circleIcon() {
+                return {
+                    onEachFeature: this.onEachFeatureFunction,
+                    pointToLayer: function (feature, latlng) {
+                
+                        return L.circleMarker(latlng, {
+                            radius: 5,
+                            fillColor: "#ffc800",
+                            color: "#000",
+                            weight: 1,
+                            opacity: 0.2,
+                            fillOpacity: 0.5
+                        });
+                    }    
+                }
+            },
+
+
   
             styleFunction() {
                 const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
