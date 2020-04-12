@@ -99,7 +99,7 @@
                         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                         
                         <l-geo-json v-if="showdesmata" :geojson="geojson_desmata":options="options" :options-style="styleFunction" ></l-geo-json>
-                        <l-geo-json v-if="showqueimada" :geojson="geojson_queimada":options="options" :options-style="styleFunction" ></l-geo-json>
+                        <l-geo-json v-if="showqueimada" :geojson="geojson_queimada":options="circleIcon"  ></l-geo-json>
                       
                       </l-map>
                 </v-container>
