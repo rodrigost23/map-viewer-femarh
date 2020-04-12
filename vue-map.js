@@ -1,6 +1,7 @@
 
     var { LMap, LTileLayer, LGeoJson, LMarker } = Vue2Leaflet;
-
+   
+ 
     new Vue({
         el: "#app",
         components: {
@@ -15,6 +16,7 @@
                 colorMenu: false,
                 loading: false,
                 showdesmata: true,
+                showqueimada: true,
                 show: true,
                 enableTooltip: true,
                 minZoom:7,
@@ -44,6 +46,8 @@
                     onEachFeature: this.onEachFeatureFunction
                 };
             },
+
+  
             styleFunction() {
                 const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
                 return () => {
@@ -63,19 +67,19 @@
                     return () => { };
                 }
                 return (feature, layer) => {
-                    layer.bindTooltip(
-                        "<div>code:" +
-                        feature.properties.code +
-                        "</div><div>nom: " +
-                        feature.properties.nom +
-                        "</div>",
-                        {
-                            permanent: false,
-                            sticky: true
-                        }
-                    );
+                    var popupContent = (feature.properties.NOME || feature.properties.VALIDADE || feature.properties.NUMEROAUT) + " - " +
+                        (feature.properties.vigencia || feature.properties.NUMEROAUT || feature.properties.sigla);
+    
+                    if (feature.properties && feature.properties.popupContent) {
+                        popupContent += feature.properties.popupContent;
+                    }
+    
+                    layer.bindPopup(popupContent);
+    
                 };
             },
+          
+            
             swatchStyle() {
                 const { fillColor, colorMenu } = this
                 return {
