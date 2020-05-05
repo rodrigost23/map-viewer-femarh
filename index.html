@@ -70,16 +70,56 @@
                               </v-list-item-action>
                               <v-list-item-title>Queimadas</v-list-item-title>
                             </v-list-item>
+
+                            <v-list-item>
+                              <v-expansion-panels flat accordion hover>
+                                <v-expansion-panel>
+                                  <v-expansion-panel-header>Embargos</v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    <v-list-item>
+                                      <v-list-item-action>
+                                        <v-switch v-model="showe2015" color="green darken-3"></v-switch>
+                                      </v-list-item-action>
+                                      <v-list-item-title>2015</v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item>
+                                      <v-list-item-action>
+                                        <v-switch v-model="showe2016" color="green darken-3"></v-switch>
+                                      </v-list-item-action>
+                                      <v-list-item-title>2016</v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item>
+                                      <v-list-item-action>
+                                        <v-switch v-model="showe2017" color="green darken-3"></v-switch>
+                                      </v-list-item-action>
+                                      <v-list-item-title>2017</v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item>
+                                      <v-list-item-action>
+                                        <v-switch v-model="showe2018" color="green darken-3"></v-switch>
+                                      </v-list-item-action>
+                                      <v-list-item-title>2018</v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item>
+                                      <v-list-item-action>
+                                        <v-switch v-model="showe2019" color="green darken-3"></v-switch>
+                                      </v-list-item-action>
+                                      <v-list-item-title>2019</v-list-item-title>
+                                    </v-list-item>
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
+                            </v-list-item>
                   
                           
                           <v-divider></v-divider>
-                          
+                          <!-- 
                           <v-list-item>
                             <v-list-item-action>
                               <v-color-picker flat hide-canvas v-model="fillColor"></v-color-picker>
                             </v-list-item-action>
                           </v-list-item>
-                  
+                   -->
                           <v-card-actions>
                             <v-spacer></v-spacer>
 
@@ -98,7 +138,12 @@
                     <l-map :zoom="zoom" :minZoom="7" :center="center" style="z-index: 0;">
                         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                         
-                        <l-geo-json v-if="showdesmata" :geojson="geojson_desmata":options="options" :options-style="styleFunction" ></l-geo-json>
+                        <l-geo-json v-if="showdesmata" :geojson="geojson_desmata":options="desmatamentoStyle" :options-style="styleFunction" ></l-geo-json>
+                        <l-geo-json v-if="showe2015" :geojson="geojson_embargos2015":options="embargosIcon"  ></l-geo-json>
+                        <l-geo-json v-if="showe2016" :geojson="geojson_embargos2016":options="embargosIcon"  ></l-geo-json>
+                        <l-geo-json v-if="showe2017" :geojson="geojson_embargos2017":options="embargosIcon"  ></l-geo-json>
+                        <l-geo-json v-if="showe2018" :geojson="geojson_embargos2018":options="embargosIcon"  ></l-geo-json>
+                        <l-geo-json v-if="showe2019" :geojson="geojson_embargos2019":options="embargosIcon"  ></l-geo-json>
                         <l-geo-json v-if="showqueimada" :geojson="geojson_queimada":options="circleIcon"  ></l-geo-json>
                       
                       </l-map>
@@ -133,6 +178,8 @@
           </v-footer>
         </v-app>
     </div>
+    <script
+    src="https://unpkg.com/vue-moment@4.1.x/dist/vue-moment.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
     <script
