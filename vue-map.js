@@ -167,8 +167,8 @@
                     return () => { };
                 }
                 return (feature, layer) => {
-                    var popupContent = (feature.properties.NOME || feature.properties.VALIDADE || feature.properties.NUMEROAUT) + " - " +
-                        (feature.properties.vigencia || feature.properties.NUMEROAUT || feature.properties.sigla);
+                    var popupContent = (feature.properties.CRIME || feature.properties.NOME || feature.properties.VALIDADE || feature.properties.NUMEROAUT) + " - " +
+                        (feature.properties.vigencia || feature.properties.NUMEROAUT || feature.properties.sigla || feature.properties.DATA_AU);
     
                     if (feature.properties && feature.properties.popupContent) {
                         popupContent += feature.properties.popupContent;
