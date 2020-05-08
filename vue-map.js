@@ -73,7 +73,7 @@
                         var today = self.$moment({hour: 0, minute: 0, seconds: 0});
                         var isBetweenDates = dates[0] <= today && today <= dates[1];
 
-                        var fillColor = "#ff9999";
+                        var fillColor = "#ffd966";
 
                         if (isBetweenDates) {
                             fillColor = "#00ff00"
@@ -167,8 +167,8 @@
                     return () => { };
                 }
                 return (feature, layer) => {
-                    var popupContent = (feature.properties.CRIME || feature.properties.NOME || feature.properties.VALIDADE || feature.properties.NUMEROAUT) + " - " +
-                        (feature.properties.vigencia || feature.properties.NUMEROAUT || feature.properties.sigla || feature.properties.DATA_AU);
+                    var popupContent = ("Idetificação: " + feature.properties.field_3 || feature.properties.CRIME || feature.properties.NOME  || feature.properties.NUMEROAUT ) + "  -  Data: " +
+                        (feature.properties.vigencia || feature.properties.NUMEROAUT || feature.properties.sigla || feature.properties.DATA_AU || feature.properties.VALIDADE);
     
                     if (feature.properties && feature.properties.popupContent) {
                         popupContent += feature.properties.popupContent;
@@ -178,6 +178,9 @@
     
                 };
             },
+
+            
+
           
             
             swatchStyle() {
