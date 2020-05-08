@@ -65,7 +65,7 @@
             circleIcon() {
                var self = this;
                 return {
-                    onEachFeature: this.onEachFeatureFunction,
+                    onEachFeature: this.onEachFeatureQueimadaLabel,
                     pointToLayer: function (feature, latlng) {
                         var inputDate = feature.properties.vigencia;
 
@@ -92,15 +92,45 @@
                 }
             },
 
+            QueimadaMarker() {
+                var self = this;
+                 return {
+                     onEachFeature: this.onEachFeatureQueimadaLabel,
+                     pointToLayer: function (feature, latlng) {
+                         var inputDate = feature.properties.vigencia;
+ 
+                         var dates = inputDate.split("a").map(function (x) { return self.$moment(x, "DD/MM/YYYY")});
+                         var today = self.$moment({hour: 0, minute: 0, seconds: 0});
+                         var isBetweenDates = dates[0] <= today && today <= dates[1];
+ 
+                         var fillColor = "#ffd966";
+ 
+                         if (isBetweenDates) {
+                             fillColor = "#00ff00"
+                             
+                         }
+                 
+                         return L.circleMarker(latlng, {
+                             radius: 5,
+                             fillColor: fillColor,
+                             color: "#fff",
+                             weight: 1,
+                             opacity: 0.5,
+                             fillOpacity: 0.5
+                         });
+                     }    
+                 }
+             },
+
             embargosIcon() {
                 var self = this;
                  return {
-                     onEachFeature: this.onEachFeatureFunction,
+                     onEachFeature: this.onEachFeatureEmbargoLabel,
                      pointToLayer: function (feature, latlng) {
 
                          return L.circleMarker(latlng, {
                              radius: 3,
-                             fillColor: "#ff6600",
+                             fillColor: "#e62e00",
                              color: "#fff",
                              weight: 1,
                              opacity: 0.2,
@@ -113,7 +143,7 @@
              desmatamentoStyle() {
                 var self = this;
                  return {
-                     onEachFeature: this.onEachFeatureFunction,
+                     onEachFeature: this.onEachFeatureDesmatamentoLabel,
                      pointToLayer: function (feature, latlng) {
 
                         return {
@@ -161,6 +191,19 @@
                 };
             },
 
+            DesmatamentoColor() {
+                return () => {
+                    return {
+                        weight: 2,
+                        color: "#ECEFF1",
+                        opacity: 0,
+                        fillColor: "#ff9933",
+                        fillOpacity: 100
+                    };
+                };
+            },
+
+
 
             onEachFeatureFunction() {
                 if (!this.enableTooltip) {
@@ -179,10 +222,58 @@
                 };
             },
 
-            
+            onEachFeatureQueimadaLabel() {
+                if (!this.enableTooltip) {
+                    return () => { };
+                }
+                return (feature, layer) => {
+ 
+                    var popupContent = ("<h3>Nome do autorizado</h3>" + feature.properties.NOME) + "<h3>Vigência</h3>" + (feature.properties.vigencia);
 
-          
+                    if (feature.properties && feature.properties.popupContent) {
+                        popupContent += feature.properties.popupContent;
+                    }
+    
+                    layer.bindPopup(popupContent);
+    
+                };
+            },
+
             
+            onEachFeatureDesmatamentoLabel() {
+                if (!this.enableTooltip) {
+                    return () => { };
+                }
+                return (feature, layer) => {
+                    var popupContent = ("<h3>Número da autorização </h3>" + feature.properties.NUMEROAUT) + "<br>"+ "<h3>Vigência </h3>" + (feature.properties.vigencia);
+    
+                    if (feature.properties && feature.properties.popupContent) {
+                        popupContent += feature.properties.popupContent;
+                    }
+    
+                    layer.bindPopup(popupContent);
+    
+                };
+            },
+
+            onEachFeatureEmbargoLabel() {
+                if (!this.enableTooltip) {
+                    return () => { };
+                }
+                return (feature, layer) => {
+                    var popupContent = ("<h3>Infração </h3>" + feature.properties.CRIME) + "<h3>Data da infração</h3>" + (feature.properties.DATA_AU);
+    
+                    if (feature.properties && feature.properties.popupContent) {
+                        popupContent += feature.properties.popupContent;
+                    }
+    
+                    layer.bindPopup(popupContent);
+    
+                };
+            },
+
+
+
             swatchStyle() {
                 const { fillColor, colorMenu } = this
                 return {

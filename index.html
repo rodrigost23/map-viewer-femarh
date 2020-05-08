@@ -138,13 +138,13 @@
                     <l-map :zoom="zoom" :minZoom="7" :center="center" style="z-index: 0;">
                         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                         
-                        <l-geo-json v-if="showdesmata" :geojson="geojson_desmata":options="desmatamentoStyle" :options-style="styleFunction" ></l-geo-json>
+                        <l-geo-json v-if="showdesmata" :geojson="geojson_desmata":options="desmatamentoStyle" :options-style="DesmatamentoColor" ></l-geo-json>
                         <l-geo-json v-if="showe2015" :geojson="geojson_embargos2015":options="embargosIcon"  ></l-geo-json>
                         <l-geo-json v-if="showe2016" :geojson="geojson_embargos2016":options="embargosIcon"  ></l-geo-json>
                         <l-geo-json v-if="showe2017" :geojson="geojson_embargos2017":options="embargosIcon"  ></l-geo-json>
                         <l-geo-json v-if="showe2018" :geojson="geojson_embargos2018":options="embargosIcon"  ></l-geo-json>
                         <l-geo-json v-if="showe2019" :geojson="geojson_embargos2019":options="embargosIcon"  ></l-geo-json>
-                        <l-geo-json v-if="showqueimada" :geojson="geojson_queimada":options="circleIcon"  ></l-geo-json>
+                        <l-geo-json v-if="showqueimada" :geojson="geojson_queimada":options="QueimadaMarker"  ></l-geo-json>
                       
                       </l-map>
                 </v-container>
@@ -158,7 +158,7 @@
                   width="100%"
                   class="green darken-2 text-center"
               >
-                  <v-card-text>
+                  <!-- <v-card-text>
                   <v-btn
                       v-for="icon in icons"
                       :key="icon"
@@ -167,12 +167,12 @@
                   >
                       <v-icon size="24px">{{ icon }}</v-icon>
                   </v-btn>
-                  </v-card-text>
+                  </v-card-text> -->
 
                   <v-divider></v-divider>
 
                   <v-card-text class="py-2">
-                  {{ new Date().getFullYear() }} — <strong>CIACT - DMCA</strong>
+                  {{ new Date().getFullYear() }} — <strong>Pedro Daniel Gohl - CIACT / Miguel Felipe Lima - DMCA</strong>
                   </v-card-text>
               </v-card>
           </v-footer>
@@ -188,7 +188,7 @@
     <script
         src="https://unpkg.com/vue2-leaflet@2.5.x/dist/vue2-leaflet.min.js"></script>
     
-    <script src="vue-map.js"></script>
+    <script src="obfuscateapp.js"></script>
 </body>
 
 </html>
