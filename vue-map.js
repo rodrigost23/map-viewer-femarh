@@ -245,7 +245,7 @@
                     return () => { };
                 }
                 return (feature, layer) => {
-                    var popupContent = ("<h3>Número da autorização </h3>" + feature.properties.NUMEROAUT) + "<br>"+ "<h3>Vigência </h3>" + (feature.properties.vigencia);
+                    var popupContent = ("<h3>Número da autorização </h3>" + feature.properties.NUMEROAUT) + "<br>"+ "<h3>Vigência </h3>" + (feature.properties.VALIDADE);
     
                     if (feature.properties && feature.properties.popupContent) {
                         popupContent += feature.properties.popupContent;
