@@ -32,6 +32,7 @@
                 
 
                 
+                
                 <v-menu>
                   <template v-slot:activator="{ on }">
                     <div class="text-center">
@@ -52,57 +53,72 @@
                         </template>
                   
                         <v-card>
-                          <v-list>
-                        
-                  
-                          <v-list>
+                      
 
                             <v-list-item>
-                              <v-list-item-action>
-                                <v-switch v-model="showdesmata" color="green darken-3"></v-switch>
-                              </v-list-item-action>
-                              <v-list-item-title>Desmatamento autorizado</v-list-item-title>
-                            </v-list-item>
-
-                            <v-list-item>
-                              <v-list-item-action>
-                                <v-switch v-model="showqueimada" color="green darken-3"></v-switch>
-                              </v-list-item-action>
-                              <v-list-item-title>Queimadas</v-list-item-title>
+                              <v-expansion-panels flat accordion hover>
+                                <v-expansion-panel>
+                                  <v-expansion-panel-header>Autorização de desmatamento</v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    <v-list-item>
+                                      <v-list-item-action>
+                                        <v-switch v-model="showdesmata" color="green darken-3"></v-switch>
+                                      </v-list-item-action>
+                                      <v-list-item-title>2019</v-list-item-title>
+                                    </v-list-item>
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
                             </v-list-item>
 
                             <v-list-item>
                               <v-expansion-panels flat accordion hover>
                                 <v-expansion-panel>
-                                  <v-expansion-panel-header>Embargos</v-expansion-panel-header>
+                                  <v-expansion-panel-header>Autorização de Queima Controlada</v-expansion-panel-header>
                                   <v-expansion-panel-content>
                                     <v-list-item>
                                       <v-list-item-action>
-                                        <v-switch v-model="showe2015" color="green darken-3"></v-switch>
+                                        <v-switch v-model="showqueimada" color="green darken-3"></v-switch>
+                                      </v-list-item-action>
+                                      <v-list-item-title>2019</v-list-item-title>
+                                    </v-list-item>
+                                  </v-expansion-panel-content>
+                                </v-expansion-panel>
+                              </v-expansion-panels>
+                            </v-list-item>
+
+                            <v-list-item>
+                              <v-expansion-panels flat accordion hover>
+                                <v-expansion-panel>
+                                  <v-expansion-panel-header></v-switch><v-switch inset value v-model="showeAll" color="green darken-3" label="Embargos"></v-switch> </v-expansion-panel-header>
+                                  <v-expansion-panel-content>
+                                    <v-list-item>
+                                      <v-list-item-action>
+                                        <v-switch inset value v-model="showe2015" color="green darken-3"></v-switch>
                                       </v-list-item-action>
                                       <v-list-item-title>2015</v-list-item-title>
                                     </v-list-item>
                                     <v-list-item>
                                       <v-list-item-action>
-                                        <v-switch v-model="showe2016" color="green darken-3"></v-switch>
+                                        <v-switch inset value v-model="showe2016" color="green darken-3"></v-switch>
                                       </v-list-item-action>
                                       <v-list-item-title>2016</v-list-item-title>
                                     </v-list-item>
                                     <v-list-item>
                                       <v-list-item-action>
-                                        <v-switch v-model="showe2017" color="green darken-3"></v-switch>
+                                        <v-switch inset value v-model="showe2017" color="green darken-3"></v-switch>
                                       </v-list-item-action>
                                       <v-list-item-title>2017</v-list-item-title>
                                     </v-list-item>
                                     <v-list-item>
                                       <v-list-item-action>
-                                        <v-switch v-model="showe2018" color="green darken-3"></v-switch>
+                                        <v-switch inset value v-model="showe2018" color="green darken-3"></v-switch>
                                       </v-list-item-action>
                                       <v-list-item-title>2018</v-list-item-title>
                                     </v-list-item>
                                     <v-list-item>
                                       <v-list-item-action>
-                                        <v-switch v-model="showe2019" color="green darken-3"></v-switch>
+                                        <v-switch inset value v-model="showe2019" color="green darken-3"></v-switch>
                                       </v-list-item-action>
                                       <v-list-item-title>2019</v-list-item-title>
                                     </v-list-item>
@@ -119,7 +135,7 @@
                               <v-color-picker flat hide-canvas v-model="fillColor"></v-color-picker>
                             </v-list-item-action>
                           </v-list-item>
-                   -->
+                          -->
                           <v-card-actions>
                             <v-spacer></v-spacer>
 
@@ -134,6 +150,7 @@
 
             <v-content>
                 <v-container class="fill-height" fluid pa-0 ma-0>
+                  
 
                     <l-map :zoom="zoom" :minZoom="7" :center="center" style="z-index: 0;">
                         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -146,8 +163,12 @@
                         <l-geo-json v-if="showe2019" :geojson="geojson_embargos2019":options="embargosIcon"  ></l-geo-json>
                         <l-geo-json v-if="showqueimada" :geojson="geojson_queimada":options="QueimadaMarker"  ></l-geo-json>
                       
-                      </l-map>
+                    </l-map>
+
+                      
                 </v-container>
+               
+                
 
             </v-content>
 
@@ -188,7 +209,7 @@
     <script
         src="https://unpkg.com/vue2-leaflet@2.5.x/dist/vue2-leaflet.min.js"></script>
     
-    <script src="obfuscateapp.js"></script>
+    <script src="vue-map.js"></script>
 </body>
 
 </html>

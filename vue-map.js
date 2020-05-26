@@ -24,6 +24,7 @@
                 showe2017: true,
                 showe2018: true,
                 showe2019: true,
+                showeAll: true,
                 show: true,
                 enableTooltip: true,
                 minZoom:7,
@@ -285,14 +286,49 @@
                     transition: 'border-radius 200ms ease-in-out',
                     border: '4px #fff solid'
                 }
-            }
+            },
+
+            allTrue() {
+                return this.showe2015 && this.showe2016 && this.showe2017 && this.showe2018 && this.showe2019 ;
+              }
 
 
 
         },
 
+        watch: {
+            // This function is executed when "allTrue changes value"
+            allTrue(showevalue) {
+              this.showeAll = showevalue;
+            },
+            // Watch when the "all" switch changes
+            all(showevalue) {
+              // Only change all values if the "all" switch is set to true
+              // or, if it's false, if all the other switches are true
+              if (showevalue || this.allTrue) {
+                // Uncomment one block and comment the other ones to choose a strategy:
+        
+                // // Use a generator function to set all values
+                // [this.a, this.b, this.c] = (function*(value) {
+                //   while (true) {
+                //     yield value;
+                //   }
+                // })(value);
+        
+                // Use Array.fill to set all values
+                // Remember to change the number 3 depending on the size of the array
+                [this.showe2015, this.showe2016, this.showe2017, this.showe2018, this.showe2019] = Array(5).fill(showevalue);
+        
+                // // Toggle one by one
+                // this.a = value;
+                // this.b = value;
+                // this.c = value;
+              }
+            }
+          },
     
         methods:{
+
            
             outputDates() {
                 var self = this;
