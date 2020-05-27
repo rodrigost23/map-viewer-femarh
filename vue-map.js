@@ -24,7 +24,7 @@
                 showe2017: true,
                 showe2018: true,
                 showe2019: true,
-                showeAll: true,
+                eShowAll: true,
                 show: true,
                 enableTooltip: true,
                 minZoom:7,
@@ -298,14 +298,14 @@
 
         watch: {
             // This function is executed when "allTrue changes value"
-            allTrue(showevalue) {
-              this.showeAll = showevalue;
+            allTrue(value) {
+              this.eShowAll = value;
             },
             // Watch when the "all" switch changes
-            all(showevalue) {
+            eShowAll(value) {
               // Only change all values if the "all" switch is set to true
               // or, if it's false, if all the other switches are true
-              if (showevalue || this.allTrue) {
+              if (value || this.allTrue) {
                 // Uncomment one block and comment the other ones to choose a strategy:
         
                 // // Use a generator function to set all values
@@ -317,7 +317,7 @@
         
                 // Use Array.fill to set all values
                 // Remember to change the number 3 depending on the size of the array
-                [this.showe2015, this.showe2016, this.showe2017, this.showe2018, this.showe2019] = Array(5).fill(showevalue);
+                [this.showe2015, this.showe2016, this.showe2017, this.showe2018, this.showe2019] = Array(5).fill(value);
         
                 // // Toggle one by one
                 // this.a = value;
