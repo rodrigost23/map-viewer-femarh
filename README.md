@@ -1,4 +1,4 @@
-# map-viewer-vue-npm
+# map-viewer-femahr
 
 ## Project setup
 ```
